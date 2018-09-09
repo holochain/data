@@ -11,7 +11,8 @@
    (github.data/token)
    ["repos" user repo "pulls"]
    (merge
-    {:base "develop"}
+    {:base "develop"
+     :per_page 100}
     params))))
 
 (defn pr!

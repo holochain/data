@@ -9,7 +9,8 @@
    [com.taoensso/timbre "4.10.0"]
    [cheshire "5.8.0"]
    [clj-time "0.14.4"]
-   [incanter "1.9.3"]])
+   [incanter "1.9.3"]
+   [com.cemerick/url "0.1.1"]])
 
 (require
  '[samestep.boot-refresh :refer [refresh]])

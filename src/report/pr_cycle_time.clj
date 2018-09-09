@@ -40,6 +40,7 @@
 (defn do-it!
  [user repo]
  (let [prs (github.prs/all-prs! user repo {:state "closed"})]
+  (prn "pr count:" (count prs))
   (->> prs
    (map
     (comp datum->cycle-time pr->datum))
