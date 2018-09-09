@@ -1,6 +1,18 @@
+## Install
+
+Install [boot](https://github.com/boot-clj/boot).
+
+Mac OS X:
+
+`brew install boot-clj`
+
 ## Environment
 
-`.lein-env` file as per `environ`.
+`.lein-env` EDN file as per [environ](https://github.com/weavejester/environ).
+
+See `.example-lein-env` for basic setup.
+
+- `:github-token` a personal access Github token with read access to repos
 
 ## Run
 
