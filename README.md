@@ -36,10 +36,12 @@ Histogram and time series of PR cycle time.
 - default is only closed PRs against the `develop` branch are counted
 - parameters can be overridden as a third param
 
-`(report.pr-cycle-time/do-it! user repo)`
-`(report.pr-cycle-time/do-it! "holochain" "holochain-rust")`
-`(report.pr-cycle-time/do-it! user repo params)`
-`(report.pr-cycle-time/do-it! "holochain" "holochain-rust" {:base "develop" :state "all"})`
+```clojure
+(report.pr-cycle-time/do-it! user repo)
+(report.pr-cycle-time/do-it! "holochain" "holochain-rust")
+(report.pr-cycle-time/do-it! user repo params)
+(report.pr-cycle-time/do-it! "holochain" "holochain-rust" {:base "develop" :state "all"})
+```
 
 ### build time plots
 
@@ -51,5 +53,7 @@ Histogram and time series of Travis build times.
 - username and repository must be provided
 - only passing builds are counted
 
-`(report.build-duration/do-it! user repo)`
-`(report.build-duration/do-it! "holochain" "holochain-rust")`
+```clojure
+(report.build-duration/do-it! user repo)
+(report.build-duration/do-it! "holochain" "holochain-rust")
+```
