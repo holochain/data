@@ -58,8 +58,13 @@
 
 (defn do-it!
  "shows histogram and time series for cycle times for closed PRs"
- [user repo]
- (let [prs (github.prs/all-prs! user repo {:state "closed"})]
-  (prn "pr count:" (count prs))
-  (prs->histogram! prs)
-  (prs->time-series! prs)))
+ ([user repo]
+  (do-it! user repo {:state "closed" :base "develop"}))
+ ([user repo params]
+  (let [prs (github.prs/all-prs! user repo params)]
+   (taoensso.timbre/debug "user:" user)
+   (taoensso.timbre/debug "repository:" repo)
+   (taoensso.timbre/debug "params:" params)
+   (taoensso.timbre/debug "pull request count:" (count prs))
+   (prs->histogram! prs)
+   (prs->time-series! prs))))
