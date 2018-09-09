@@ -10,7 +10,7 @@
 
 (def iso8601-> (partial time.core/format-> :date-time-no-ms))
 
-(defn endpoint->url [endpoint] (api.core/endpoint->url github.data/base-url endpoint))
+(def endpoint->url (partial api.core/endpoint->url github.data/base-url))
 
 (defn with-options
  [params options]
@@ -28,10 +28,6 @@
 (defn with-auth-headers
  [params token]
  (update-in params [:query-params] merge {:access_token token}))
-
-(defn with-url
- [params url]
- (assoc params :url url))
 
 (defn response-ok?
  [response]
@@ -85,13 +81,13 @@
  ([token endpoint options & params]
   (taoensso.timbre/debug "Requesting Github endpoint" endpoint)
   (let [params' (-> (apply hash-map params)
-                 (with-url (endpoint->url endpoint))
+                 (api.core/with-url (endpoint->url endpoint))
                  (with-options options)
                  with-api-version-headers
                  (with-auth-headers token))
         request (org.httpkit.client/request params')]
+   ; pagination...
    (let [last-page (response->last-page @request)]
-    ; pagination...
     (flatten
      (map
       (comp response->data throw-bad-response! deref)

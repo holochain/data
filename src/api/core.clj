@@ -23,3 +23,7 @@
   (if-not (clojure.string/starts-with? endpoint base-url)
    (str base-url endpoint)
    endpoint)))
+
+(defn with-url
+ [params url]
+ (assoc params :url url))
