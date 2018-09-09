@@ -4,7 +4,9 @@
   time.core
   github.prs
   time.spec
-  github.core))
+  github.core
+  incanter.charts
+  incanter.core))
 
 (spec/def ::start :time.spec/datetime)
 (spec/def ::end :time.spec/datetime)
@@ -30,7 +32,7 @@
  [datum]
  {:pre [(spec/valid? ::datum datum)]
   :post [(spec/valid? int? %)]}
- (clj-time.core/in-minutes
+ (clj-time.core/in-hours
   (clj-time.core/interval
    (::start datum)
    (::end datum))))
@@ -38,6 +40,8 @@
 (defn do-it!
  [user repo]
  (let [prs (github.prs/all-prs! user repo {:state "closed"})]
-  (map
-   (comp datum->cycle-time pr->datum)
-   prs)))
+  (->> prs
+   (map
+    (comp datum->cycle-time pr->datum))
+   incanter.charts/histogram
+   incanter.core/view)))

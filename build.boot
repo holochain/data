@@ -8,7 +8,8 @@
    [environ "1.1.0"]
    [com.taoensso/timbre "4.10.0"]
    [cheshire "5.8.0"]
-   [clj-time "0.14.4"]])
+   [clj-time "0.14.4"]
+   [incanter "1.9.3"]])
 
 (require
  '[samestep.boot-refresh :refer [refresh]])
