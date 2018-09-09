@@ -4,7 +4,10 @@
   taoensso.timbre
   cheshire.core
   api.core
+  time.core
   github.data))
+
+(def iso8601-> (partial time.core/format-> :date-time-no-ms))
 
 (defn endpoint->url [endpoint] (api.core/endpoint->url github.data/base-url endpoint))
 

@@ -7,7 +7,8 @@
    [http-kit "2.2.0"]
    [environ "1.1.0"]
    [com.taoensso/timbre "4.10.0"]
-   [cheshire "5.8.0"]])
+   [cheshire "5.8.0"]
+   [clj-time "0.14.4"]])
 
 (require
  '[samestep.boot-refresh :refer [refresh]])

@@ -4,11 +4,15 @@
    github.data))
 
 (defn all-prs!
- [user repo]
- (github.core/api!
-  (github.data/token)
-  ["repos" user repo "pulls"]
-  {:base "develop"}))
+ ([user repo]
+  (all-prs! user repo nil))
+ ([user repo params]
+  (github.core/api!
+   (github.data/token)
+   ["repos" user repo "pulls"]
+   (merge
+    {:base "develop"}
+    params))))
 
 (defn pr!
  [user repo n]
