@@ -86,8 +86,8 @@
                  with-api-version-headers
                  (with-auth-headers token))
         request (org.httpkit.client/request params')]
+   ; pagination...
    (let [last-page (response->last-page @request)]
-    ; pagination...
     (flatten
      (map
       (comp response->data throw-bad-response! deref)

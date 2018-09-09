@@ -2,35 +2,52 @@
  (:require
   travis.spec
   time.spec
-  [clojure.spec.alpha :as spec]))
+  travis.builds
+  [clojure.spec.alpha :as spec]
+  incanter.core
+  incanter.charts))
 
-(spec/def ::duration :travis.spec/duration)
-(spec/def ::started :time.spec/datetime)
+(spec/def ::start :time.spec/datetime)
+(spec/def ::end :time.spec/datetime)
 
 (spec/def ::datum
  (spec/keys
-  :req [::duration
-        ::started]))
+  :req
+  [
+   ::start
+   ::end]))
 
 (defn build->datum
  [build]
  {:pre [(spec/valid? :travis.spec/build build)]
   :post [(spec/valid? ::datum %)]}
- {::duration (:duration build)
-  ::started (-> build :started_at travis.core/iso8601->)})
+ {
+  ::start (-> build :started_at travis.core/iso8601->)
+  ::end (-> build :finished_at travis.core/iso8601->)})
+
+(defn datum->duration
+ [datum]
+ {:pre [(spec/valid? ::datum datum)]
+  :post [(spec/valid? int? %)]}
+ ; can't use `duration` from the build object provided by Travis as this gives
+ ; wall time rather than build time
+ (clj-time.core/in-minutes
+  (clj-time.core/interval
+   (::start datum)
+   (::end datum))))
 
 (defn builds->histogram!
  [builds]
  (incanter.core/view
   (incanter.charts/histogram
    (map
-    (comp ::duration build->datum)
+    (comp datum->duration build->datum)
     builds))))
 
 (defn builds->time-series!
  [builds]
- (let [start-times (map (comp clj-time.coerce/to-long ::started build->datum) builds)
-       durations (map (comp ::duration build->datum) builds)]
+ (let [start-times (map (comp clj-time.coerce/to-long ::start build->datum) builds)
+       durations (map (comp datum->duration build->datum) builds)]
   (incanter.core/view
    (incanter.charts/time-series-plot
     start-times
@@ -45,7 +62,7 @@
 (defn do-it!
  "shows histogram and time series for durations for CI builds"
  [user repo]
- (let [builds (filtered-builds-pass (travis.builds/find (str user "/" repo)))]
+ (let [builds (filtered-builds-pass (travis.builds/find user repo))]
   (taoensso.timbre/debug "user:" user)
   (taoensso.timbre/debug "repository:" repo)
   (builds->histogram! builds)
