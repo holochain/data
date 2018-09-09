@@ -13,6 +13,7 @@ Mac OS X:
 See `.example-lein-env` for basic setup.
 
 - `:github-token` a personal access Github token with read access to repos
+- `:travis-token` access token for Travis generated with CLI client
 
 ## Run
 

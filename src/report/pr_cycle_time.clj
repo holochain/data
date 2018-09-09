@@ -46,7 +46,6 @@
     (comp datum->cycle-time pr->datum)
     prs))))
 
-
 (defn prs->time-series!
  [prs]
  (let [open-times (map (comp clj-time.coerce/to-long ::open pr->datum) prs)
