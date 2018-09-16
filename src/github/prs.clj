@@ -17,9 +17,10 @@
 
 (defn pr!
  [user repo n]
- (github.core/api!
-  (github.data/token)
-  ["repos" user repo "pulls" n]))
+ (first
+  (github.core/api!
+   (github.data/token)
+   ["repos" user repo "pulls" n])))
 
 (defn with-labels
  "Merges in the labels for a given PR or collection of PRs"
