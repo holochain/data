@@ -1,7 +1,9 @@
 (ns report.pr-loc
  (:require
   [clojure.spec.alpha :as spec]
-  github.spec))
+  github.spec
+  incanter.charts
+  incanter.core))
 
 (spec/def ::additions :github.spec/additions)
 (spec/def ::deletions :github.spec/deletions)
