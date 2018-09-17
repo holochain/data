@@ -11,45 +11,59 @@
 
 (spec/def ::open :time.spec/datetime)
 (spec/def ::close :time.spec/datetime)
+(spec/def ::cycle-time int?)
+(spec/def ::number :github.spec/number)
+(spec/def ::title :github.spec/title)
 
 (spec/def ::datum
  (spec/keys
   :req
   [::open
-   ::close]))
+   ::close
+   ::cycle-time
+   ::number
+   ::title]))
+
+(defn calculate-cycle-time
+ [datum]
+ (clj-time.core/in-hours
+  (clj-time.core/interval
+   (::open datum)
+   (::close datum))))
+
+(defn with-cycle-time
+ [datum]
+ (merge
+  datum
+  {::cycle-time (calculate-cycle-time datum)}))
 
 (defn pr->datum
  [pr]
  {:pre [(spec/valid? :github.spec/pr pr)]
   :post [(spec/valid? ::datum %)]}
- {::open (-> pr :created_at github.core/iso8601->)
-  ; fallback to now if the pr is still open
-  ::close
-  (or
-   (some-> pr :closed_at github.core/iso8601->)
-   (clj-time.core/now))})
-
-(defn datum->cycle-time
- [datum]
- {:pre [(spec/valid? ::datum datum)]
-  :post [(spec/valid? int? %)]}
- (clj-time.core/in-hours
-  (clj-time.core/interval
-   (::open datum)
-   (::close datum))))
+ (->
+  {::open (-> pr :created_at github.core/iso8601->)
+   ; fallback to now if the pr is still open
+   ::close
+   (or
+    (some-> pr :closed_at github.core/iso8601->)
+    (clj-time.core/now))
+   ::number (:number pr)
+   ::title (:title pr)}
+  with-cycle-time))
 
 (defn prs->histogram!
  [prs]
  (incanter.core/view
   (incanter.charts/histogram
    (map
-    (comp datum->cycle-time pr->datum)
+    (comp ::cycle-time pr->datum)
     prs))))
 
 (defn prs->time-series!
  [prs]
  (let [open-times (map (comp clj-time.coerce/to-long ::open pr->datum) prs)
-       cycle-times (map (comp datum->cycle-time pr->datum) prs)]
+       cycle-times (map (comp ::cycle-time pr->datum) prs)]
   (incanter.core/view
    (incanter.charts/time-series-plot
     open-times

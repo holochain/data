@@ -4,6 +4,7 @@
   time.spec))
 
 (spec/def ::number pos-int?)
+(spec/def ::title string?)
 
 (spec/def ::created_at :time.spec/iso8601)
 (spec/def ::closed_at (spec/nilable :time.spec/iso8601))
@@ -16,7 +17,8 @@
   :req-un
   [::created_at
    ::closed_at
-   ::number]))
+   ::number
+   ::title]))
 
 (spec/def ::pr--full
  (spec/merge
