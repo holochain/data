@@ -32,8 +32,8 @@
    (taoensso.timbre/debug "user:" user)
    (taoensso.timbre/debug "repository:" repo)
    (taoensso.timbre/debug "params:" params)
-   ; (doseq [vs [loc:totals loc:diffs]]
-   ;  (view-scatter! cycle:cycle-times vs))
+   (doseq [vs [loc:totals loc:diffs]]
+    (view-scatter! cycle:cycle-times vs))
    (doseq [[by xs] [[:report.pr-cycle-time/cycle-time
                      (map
                       #(dissoc % :report.pr-cycle-time/close :report.pr-cycle-time/open)
