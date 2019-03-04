@@ -4,8 +4,10 @@ For now all steps are done by hand.
 
 ## Importer
 
-The widget already includes sample data, so no need to run the importer to try it out.
-Enter the importer folder. Check out the widget section below.
+*The widget already includes sample data, so no need to run the importer to try it out.
+Check out the widget section below.*
+
+Enter the importer folder.
 
 ```
 cd importer
