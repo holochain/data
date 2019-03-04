@@ -1,0 +1,21 @@
+{
+  "name": "holochain-pulse",
+  "version": "1.0.0",
+  "description": "",
+  "main": "import.js",
+  "scripts": {
+    "bootstrap": "npm i && (cp -n .env.dist .env || true)"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-boost": "^0.3.1",
+    "apollo-client": "^2.5.1",
+    "apollo-link-http": "^1.5.11",
+    "dotenv": "^6.2.0",
+    "graphql": "^14.1.1",
+    "graphql-tag": "^2.10.1",
+    "moment": "^2.24.0",
+    "node-fetch": "^2.3.0"
+  }
+}
