@@ -1,0 +1,138 @@
+const START = "2018-01-01T00:00:00Z";
+const GRANULARITY = "week";
+
+const REPOS = {
+  holochain: {
+    core: [
+      "holochain-rust",
+      "n3h",
+      "soa-scraper",
+      "holochain-proto",
+      "hcid",
+      "jsonrpc",
+      "js-multihash",
+      "n-bch-rs",
+      "futures-rs",
+      "multihash",
+      "hcrs",
+      "holosqape",
+      "holochain-node-http-container",
+      "hdk-assemblyscript",
+      "node-js-libp2p-ipc",
+      "node-p2p-ipc",
+      "holochain-proto-types",
+      "rust-libp2p",
+      "lib3h"
+    ],
+    utilities: [
+      "dev-resource-kit",
+      "HC-Admin",
+      "hc-redux-middleware",
+      "hc-web-client",
+      "holochain-ui",
+      "hc-ts-template",
+      "hc-siderun",
+      "react-web-ui-kit",
+      "positron",
+      "scaffold",
+      "dna-to-openapi",
+      "mixins",
+      "sample-zome",
+      "web-components"
+    ],
+    resources: [
+      "docs-pages",
+      "apps",
+      "cryptographic-autonomy-license",
+      "website",
+      "benchmarks",
+      "mapOnHolochain"
+    ],
+    misc: [
+      "dev-camp-idea",
+      "dev-camp-playground",
+      "dev-camp-tests-rust",
+      "dev-camp-test",
+      "org",
+      "data",
+      "cloud9ForHackathons"
+    ],
+    apps: [
+      "simple-app",
+      "holochain-basic-chat",
+      "personas-profiles",
+      "holochat-rust",
+      "HApps-Store",
+      "HCHC-rust",
+      "tasktaskic",
+      "clutter",
+      "assemblyscript-example-app",
+      "holochat",
+      "dpki",
+      "HCHC",
+      "minersweeper",
+      "fed-wiki",
+      "holochess",
+      "PeerVis",
+      "cointoss",
+      "panoptipong",
+      "transactor",
+      "fractal-wiki",
+      "holodex",
+      "HoloWorld",
+      "consumeHolodex",
+      "HoloWorldBridge",
+      "touchpoints",
+      "dao",
+      "cludder"
+    ]
+  },
+  "Holo-Host": {
+    core: [
+      "holoportos",
+      "servicelogger",
+      "Holo-Supervisor",
+      "dpki-lite.js",
+      "hClient.js",
+      "intrceptr",
+      "loader",
+      "DeepKey",
+      "HApps-Store",
+      "holofuel-gui",
+      "Holo-Hosting-App",
+      "hc-react-redux-framework",
+      "HCAdmin-proto-GUI",
+      "nixbox",
+      "holoport-cloudflared",
+      "HCInstaller",
+      "Holo-UI-Tools",
+      "HCHC",
+      "HCRust-Scaffold",
+      "holofuel-ui",
+      "holofuel-python",
+      "holo-prototype",
+      "dpki-ui",
+      "holofuel-model",
+      "holoport-manager",
+      "hpstress",
+      "holoport-manager-ui",
+      "hosting-apps-proto",
+      "holo-dev-knowledge-commons",
+      "holojs-sample-app",
+      "holo.js",
+      "holo-loader.js",
+      "scaffold",
+      "holoport",
+      "nixpkgs",
+      "nix-docker",
+      "holo",
+      "ICO"
+    ]
+  }
+};
+
+module.exports = {
+  START,
+  REPOS,
+  GRANULARITY
+};
